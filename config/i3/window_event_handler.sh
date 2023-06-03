@@ -6,6 +6,14 @@
 #  - There is a minimal but still perceptible delay between i3 event receival
 #    and visual result
 
+output_to_polybar_pid(){
+    output=$1
+    # Check polybar/launch.sh & i3/config
+	cat /tmp/polybar/pids \
+	| grep $output \
+	| awk '{split($0,a,"="); print a[2]}'
+}
+
 on_window_event() {
     while read -r event; do
         event_change="$(echo "$event" | jq -r '.change')"
@@ -23,15 +31,19 @@ on_window_event() {
             fullscreen_mode)
                 output=$(echo "$event" | jq -r '.container.output')
                 is_fullscreen_mode=$(echo "$event" | jq -r '.container.fullscreen_mode')
-                output_pid=$(\
-                    # Check polybar/launch.sh & i3/config
-	                cat /tmp/polybar/pids \
-	                | grep $output \
-	                | awk '{split($0,a,"="); print a[2]}')
+                output_pid=$(output_to_polybar_pid $output)
                 if [[ $is_fullscreen_mode -eq 0 ]]; then
                     polybar-msg -p $output_pid cmd show;
                 else
                     polybar-msg -p $output_pid cmd hide;
+                fi
+                ;;
+            close)
+                output=$(echo "$event" | jq -r '.container.output')
+                is_fullscreen_mode=$(echo "$event" | jq -r '.container.fullscreen_mode')
+                output_pid=$(output_to_polybar_pid $output)
+                if [[ $is_fullscreen_mode -eq 1 ]]; then
+                    polybar-msg -p $output_pid cmd show;
                 fi
                 ;;
             *)
