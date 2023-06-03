@@ -1,0 +1,50 @@
+configuration {
+	display-window: "Windows";
+	modi: [window];
+	show-icons: true;
+}
+
+@theme "/dev/null"
+
+mainbox, entry {
+    children: [listview];
+}
+
+* {
+	bg: #11121D;
+	bg-alt: #444b6a;
+	fg: #FFFFFF;
+	fg-alt: #787C99;
+	background-color: @bg;
+}
+
+window {
+	height: 15%;
+}
+
+element {
+    orientation: horizontal;
+    children: [element-icon];
+	padding: 3;
+	text-color: @fg-alt;
+}
+
+element-icon {
+    size: 5em;
+}
+
+element selected {
+	background-color: @fg;
+}
+
+
+listview {
+	background-color: @bg;
+    layout: horizontal;
+    spacing: 15px;
+}
+
+element selected {
+	text-color: @fg;
+}
+
