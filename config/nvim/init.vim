@@ -43,6 +43,8 @@ set autoindent              " indent a new line the same amount as the line
 set number                  " add line numbers
 set wildmode=longest,list   " get bash-like tab completions
 set cc=80                  " set an 80 column border for good coding style
+set textwidth=80            " set maximum text width at 80 characters
+set wrapmargin=0            " make text wrap exactly at the end of the text width
 highlight ColorColumn ctermbg=7 
 filetype plugin indent on   "allow auto-indenting depending on file type
 syntax on                   " syntax highlighting

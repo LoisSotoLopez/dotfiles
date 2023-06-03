@@ -17,13 +17,15 @@ DOTFILE_PATHS=(
 )
 
 collect_path() {
+    path=$1
     mkdir -p "config"
-    if test -d $1; then
-        echo -e "${green}Collecting${reset} $1"
-        cp -r $1 "config/$(basename $path)"
+    if test -d $path; then
+        echo -e "${green}Collecting${reset} $path"
+        rsync -ruv $path "config/"
     else
         echo -e "${red}Couldn't find${reset} $1 dir"
     fi
+    echo ""
 }
 
 for path in ${DOTFILE_PATHS[@]}; do

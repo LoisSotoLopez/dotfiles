@@ -4,11 +4,12 @@
 polybar-msg cmd quit
 
 echo "---" \ tee -a /tmp/polybar1.log
-rm -rf ~/.config/polybar/pids
+mkdir -p /tmp/polybar
+rm -f /tmp/polybar/pids
 if type "xrandr"; then
   for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
     MONITOR=$m polybar --reload default &
-	echo "$m=$!" >> ~/.config/polybar/pids &
+    echo "$m=$!" >> /tmp/polybar/pids &
   done
 else
   polybar --reload default &
