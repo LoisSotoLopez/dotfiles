@@ -28,3 +28,17 @@ keymap("n", "<leader>l", ":lua require'nvim-tree'.change_dir(require'nvim-tree.l
 keymap("n", "<leader>h", ":lua require'nvim-tree.actions.root.dir-up'.fn()<cr>", opts)
 -- Toggle "hidden" files
 keymap("n", "<leader>a", ":lua require'nvim-tree.api'.tree.toggle_hidden_filter()<cr>", opts)
+-- Expand dir
+keymap("n", "<CR>", ":lua require'nvim-tree.api'.node.open.edit()<cr>", opts)
+-- Toggle Terminal
+-- This is only necessary for toggling terminal from NvimTree buffer since the
+-- setup configured for toggleterm on ../init.vim already configures the togging
+-- for nvim
+-- Also had to remove default keymaps for NvimTree at init.lua
+keymap("n", "<C-t>", ":ToggleTerm<cr>", opts) 
+
+-- Terminal mode --
+keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", opts)
+keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", opts)
+keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", opts)
+keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", opts)

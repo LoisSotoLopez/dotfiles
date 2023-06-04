@@ -7,9 +7,6 @@ Plug 'vim-airline/vim-airline'
 " Visual Settings
 Plug 'junegunn/limelight.vim'
 
-" File icons
-
-
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
 
@@ -78,11 +75,14 @@ call plug#begin("~/.vim/plugged")
  " nvim-tree
  Plug 'nvim-tree/nvim-web-devicons' " optional, file icons
  Plug 'nvim-tree/nvim-tree.lua'
+ " embeded terminal
+ Plug 'akinsho/toggleterm.nvim'
 call plug#end()
 
 lua require('init')
 lua require('keymaps')
-lua require'nvim-tree'.setup {}
+lua require'nvim-tree'.setup { remove_keymaps = true, }
+lua require'toggleterm'.setup { open_mapping = [[<c-t>]],}
 
 " Make netrw split let open the new window at right side
 let g:netrw_altv=1
