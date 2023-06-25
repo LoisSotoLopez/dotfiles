@@ -4,6 +4,8 @@
   scroll_tabbar = True
   always_on_top = True
   enabled_plugins = LaunchpadBugURLHandler, LaunchpadCodeURLHandler, APTURLHandler, TerminatorThemes
+  case_sensitive = False
+  invert_search = True
 [keybindings]
 [profiles]
   [[default]]
